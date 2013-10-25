@@ -1,0 +1,41 @@
+Copyright 2013 Groupon, Inc
+
+Portions of this software were developed at the Apache Software
+Foundation. This is the AvailablePortFinder class from the Apache
+Directory project. It has been modified to put it into a new
+namespace.
+
+Portions of this software were developed at Google, Inc. This is the
+Guava library. It has been modified to put it into a new namespace.
+
+--
+
+
+# Fine Print
+
+This library basically creates an instance of MySQL, on demand, for
+testing purposes. It then creates connections to the MySQL database
+using the standard library (driver) for doing so. It relies on these
+libraries ( connector-mxj for running the mysql database, and
+connector-java for connecting to the database) being available on the
+system, it does *not* provide or bundle them itself. These libraries
+are licensed under the GPL (v2) with the  "FOSS License Exception" (
+http://www.mysql.com/about/legal/licensing/foss-exception/ ). In the
+words of Oracle, "The FOSS License Exception permits use of the
+GPL-licensed MySQL Client Libraries with software applications
+licensed under certain other FOSS licenses without causing the entire
+derivative work to be subject to the GPL."
+
+It has code from two Apache 2 licensed projects copied directly into
+it, these are Guava and Apache Directory projects. The terms of these
+licenses have been maintained (that is, we maintain notice of
+copyright and describe modifications in the NOTICE file).
+
+In addition, this library depends on the JUnit library which is
+licensed under the Eclipse Public License. It extends a class in this
+library in order to provide the functionality for working with MySQL
+when using JUnit (the most commonly used test harness for Java).
+
+Finally, the library has support for working with two additional
+libraries commonly used for interacting with databases in Java, Flyway
+and jdbi.
