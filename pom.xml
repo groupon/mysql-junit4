@@ -16,15 +16,13 @@
     limitations under the License.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.groupon.mysql</groupId>
     <artifactId>mysql-junit4</artifactId>
     <packaging>jar</packaging>
     <name>mysql-junit4</name>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <description>
         Convenience library for using embedded MySQL in Junt4 tests.
     </description>
@@ -59,7 +57,8 @@
         <connection>scm:git:git@github.com:groupon/mysql-junit4.git</connection>
         <developerConnection>scm:git:git@github.com:groupon/mysql-junit4.git</developerConnection>
         <url>https://github.com/groupon/mysql-junit4/tree/master</url>
-    </scm>
+      <tag>0.0.1</tag>
+  </scm>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
