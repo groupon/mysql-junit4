@@ -22,7 +22,7 @@
     <artifactId>mysql-junit4</artifactId>
     <packaging>jar</packaging>
     <name>mysql-junit4</name>
-    <version>0.0.1</version>
+    <version>0.0.2-SNAPSHOT</version>
     <description>
         Convenience library for using embedded MySQL in Junt4 tests.
     </description>
@@ -57,7 +57,7 @@
         <connection>scm:git:git@github.com:groupon/mysql-junit4.git</connection>
         <developerConnection>scm:git:git@github.com:groupon/mysql-junit4.git</developerConnection>
         <url>https://github.com/groupon/mysql-junit4/tree/master</url>
-      <tag>0.0.1</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <properties>
