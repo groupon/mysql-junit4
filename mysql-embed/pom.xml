@@ -141,7 +141,7 @@
                         </keep>
                         <rule>
                             <pattern>com.google.**.*</pattern>
-                            <result>com.groupon.mysql.testing.com.google.@1.$@2</result>
+                            <result>com.groupon.mysql.com.google.@1.$@2</result>
                         </rule>
                     </rules>
                 </configuration>
