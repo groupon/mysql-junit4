@@ -53,8 +53,8 @@
     </parent>
 
     <modules>
-      <module>mysql-junit4</module>
       <module>mysql-embed</module>
+      <module>mysql-junit4</module>
     </modules>
     <build>
       <plugins>
