@@ -27,11 +27,11 @@
 package com.groupon.mysql.testing;
 
 
-import com.google.common.collect.Lists;
 import org.junit.rules.ExternalResource;
 
 import javax.sql.DataSource;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicReference;
@@ -191,7 +191,7 @@ public class MySQLRule extends ExternalResource
      *
      * @see MySQLRule#createFixtures(com.groupon.mysql.testing.MySQLRule.Fixture)
      */
-    public final static class Fixtures extends ExternalResource
+    public static final class Fixtures extends ExternalResource
     {
         private final DataSource ds;
         private final List<Fixture> fixtures;
@@ -199,7 +199,7 @@ public class MySQLRule extends ExternalResource
         private Fixtures(final DataSource ds, final Fixture... fixture)
         {
             this.ds = ds;
-            this.fixtures = Lists.newArrayList(fixture);
+            this.fixtures = Arrays.asList(fixture);
         }
 
         @Override

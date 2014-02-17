@@ -70,6 +70,11 @@
         <tag>HEAD</tag>
     </scm>
 
+    <properties>
+        <basepom.check.fail-dependency>false</basepom.check.fail-dependency>
+        <basepom.check.fail-findbugs>false</basepom.check.fail-findbugs>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.groupon.mysql</groupId>
@@ -116,50 +121,6 @@
                     <source>1.7</source>
                     <target>1.7</target>
                 </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>jarjar-maven-plugin</artifactId>
-                <version>1.8</version>
-                <configuration>
-                    <includes>
-                        <include>com.groupon.mysql:mysql-junit4</include>
-                        <include>com.google.guava:guava</include>
-                    </includes>
-                    <rules>
-                        <keep>
-                            <pattern>com.groupon.mysql.testing.*</pattern>
-                        </keep>
-                        <rule>
-                            <pattern>com.google.**.*</pattern>
-                            <result>com.groupon.mysql.testing.com.google.@1.$@2</result>
-                        </rule>
-                    </rules>
-                </configuration>
-                <!-- JarJar all classes before running tests -->
-                <executions>
-                    <execution>
-                        <id>jarjar-classes</id>
-                        <phase>process-test-classes</phase>
-                        <goals>
-                            <goal>jarjar</goal>
-                        </goals>
-                        <configuration>
-                            <input>{classes}</input>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>jarjar-test-classes</id>
-                        <phase>process-test-classes</phase>
-                        <goals>
-                            <goal>jarjar</goal>
-                        </goals>
-                        <configuration>
-                            <input>{test-classes}</input>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

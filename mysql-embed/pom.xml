@@ -69,6 +69,11 @@
         <tag>HEAD</tag>
     </scm>
 
+    <properties>
+        <basepom.check.fail-dependency>false</basepom.check.fail-dependency>
+        <basepom.check.fail-findbugs>false</basepom.check.fail-findbugs>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.google.guava</groupId>
