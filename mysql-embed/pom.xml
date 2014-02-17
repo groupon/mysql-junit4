@@ -26,11 +26,10 @@
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.groupon.mysql</groupId>
     <artifactId>mysql-embed</artifactId>
     <packaging>jar</packaging>
     <name>mysql-embed</name>
-    <version>0.0.2-SNAPSHOT</version>
+    <!--<version>0.0.2-SNAPSHOT</version>-->
     <description>
         Convenience library for using embedded MySQL in Junt4 tests.
     </description>
@@ -70,6 +69,7 @@
     </scm>
 
     <properties>
+        <project.build.targetJdk>1.7</project.build.targetJdk>
         <basepom.check.fail-dependency>false</basepom.check.fail-dependency>
         <basepom.check.fail-findbugs>false</basepom.check.fail-findbugs>
     </properties>
@@ -137,7 +137,7 @@
                     </includes>
                     <rules>
                         <keep>
-                            <pattern>com.groupon.mysql.testing.*</pattern>
+                            <pattern>com.groupon.mysql.*</pattern>
                         </keep>
                         <rule>
                             <pattern>com.google.**.*</pattern>
