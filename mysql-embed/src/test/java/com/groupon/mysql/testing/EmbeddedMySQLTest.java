@@ -27,43 +27,22 @@
 package com.groupon.mysql.testing;
 
 
-import org.junit.ClassRule;
-import org.junit.Rule;
+import com.groupon.mysql.EmbeddedMySQL;
 import org.junit.Test;
-import org.skife.jdbi.v2.DBI;
-import org.skife.jdbi.v2.Handle;
-import org.skife.jdbi.v2.util.StringMapper;
 
-import java.util.List;
+import javax.sql.DataSource;
+import java.sql.Connection;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
-public class MultipleFixturesExample
+public class EmbeddedMySQLTest
 {
-    @ClassRule public static MySQLRule mysql = MySQLRule.global();
-
-    /**
-     * You can add multiple fixtures to a Fixtures :-)
-     */
-    @Rule public MySQLRule.Fixtures fixtures = mysql.createFixtures(new FlywayFixture("db/migration", "db/fixtures"),
-                                                                    new JDBIFixture()
-                                                                    {
-                                                                        @Override
-                                                                        protected void before(final Handle handle)
-                                                                        {
-                                                                            handle.execute("insert into something (id, name) values (3, 'Peter')");
-                                                                        }
-                                                                    });
-
     @Test
     public void testFoo() throws Exception
     {
-        try (Handle h = DBI.open(mysql.getDataSource())) {
-            List<String> names = h.createQuery("select name from something order by id")
-                                  .map(StringMapper.FIRST)
-                                  .list();
-            assertThat(names).containsExactly("Gene", "Brian", "Peter");
+        try (EmbeddedMySQL mysql = EmbeddedMySQL.start())
+        {
+            DataSource ds = mysql.getDataSource("foo");
+            Connection conn = ds.getConnection();
+            conn.close();
         }
     }
-
 }
