@@ -32,62 +32,28 @@ package com.groupon.mysql.testing;
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import com.google.common.cache.CacheBuilder;
-import com.google.common.cache.CacheLoader;
-import com.google.common.cache.LoadingCache;
-import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
-import com.google.common.io.Files;
-import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
-import com.mysql.management.MysqldResource;
-import com.mysql.management.MysqldResourceI;
 import org.junit.rules.ExternalResource;
 
 import javax.sql.DataSource;
-import java.io.File;
 import java.io.IOException;
 import java.net.DatagramSocket;
 import java.net.ServerSocket;
 import java.util.List;
-import java.util.Map;
 import java.util.NoSuchElementException;
-import java.util.Set;
-import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class MySQLRule extends ExternalResource
 {
     private static final AtomicReference<MySQLRule> global = new AtomicReference<>();
-    /**
-     * Shouldn't be needed, but failed tests can leave mysql hanging :-( Need a finally()
-     * in JUnit -bmc
-     */
-    private static final AtomicInteger internalCounter = new AtomicInteger(4096);
-
-
 
 
     private final ReentrantLock lock = new ReentrantLock(false);
     private final AtomicBoolean started = new AtomicBoolean(false);
-    private final AtomicInteger port = new AtomicInteger(-1);
-    private final AtomicReference<MysqldResource> daemon = new AtomicReference<>();
-    private final AtomicReference<File> dir = new AtomicReference<>();
+    private final AtomicReference<EmbeddedMySQL> daemon = new AtomicReference<>();
     private final boolean shutdownOnAfter;
-    private final LoadingCache<String, DataSource> dataSources = CacheBuilder.newBuilder().build(new CacheLoader<String, DataSource>()
-    {
-        @Override
-        public DataSource load(final String key) throws Exception
-        {
-            MysqlDataSource ds = new MysqlDataSource();
-            ds.setURL(getUrl(key));
-            ds.setUser("user");
-            ds.setPassword("pass");
-            return ds;
-        }
-    });
 
 
     private MySQLRule(boolean shutdownOnAfter)
@@ -188,46 +154,19 @@ public class MySQLRule extends ExternalResource
         if (!started.get()) {
             throw new IllegalStateException("mysql has not been started");
         }
-        return dataSources.get(database);
+        return daemon.get().getDataSource(database);
     }
 
     private void _start() throws Exception
     {
-
-        port.set(AvailablePortFinder.getNextAvailable(internalCounter.getAndIncrement()));
-
-        File tmp_dir = Files.createTempDir();
-
-        MysqldResource mysqld = new MysqldResource(tmp_dir);
-
-        Map<String, String> props = ImmutableMap.of(MysqldResourceI.PORT, Integer.toString(port.get()),
-                                                    MysqldResourceI.INITIALIZE_USER, "true",
-                                                    MysqldResourceI.INITIALIZE_USER_NAME, "user",
-                                                    MysqldResourceI.INITIALIZE_PASSWORD, "pass",
-                                                    "default-time-zone", "+00:00");
-        mysqld.start("mysql-daemon", props);
-        if (!mysqld.isRunning()) {
-            throw new IllegalStateException("MySQL failed to start");
-        }
-        while (!mysqld.isReadyForConnections()) { Thread.sleep(100); }
-
-        daemon.set(mysqld);
-        dir.set(tmp_dir);
+        daemon.set(EmbeddedMySQL.start());
     }
 
     private void _stop() throws InterruptedException, IOException
     {
-        MysqldResource mysqld = daemon.get();
-        File tmp_dir = dir.get();
-
-        mysqld.shutdown();
-        while (mysqld.isRunning()) { Thread.sleep(100); }
-        Runtime.getRuntime().exec("rm -rf " + tmp_dir.getAbsolutePath()).waitFor();
-
-        dataSources.invalidateAll();
-        dir.set(null);
+        daemon.get().close();
         daemon.set(null);
-
+        started.set(false);
     }
 
     /**
@@ -239,7 +178,7 @@ public class MySQLRule extends ExternalResource
      */
     public Fixtures createFixtures(String database, Fixture... f)
     {
-        return new Fixtures(dataSources.getUnchecked(database), f);
+        return new Fixtures(daemon.get().getDataSource(database), f);
     }
 
     /**
@@ -253,40 +192,6 @@ public class MySQLRule extends ExternalResource
     public Fixtures createFixtures(Fixture... f)
     {
         return createFixtures("foo", f);
-    }
-
-    /**
-     * Obtain the JDBC connection URL
-     *
-     * @param database The database name
-     */
-    public String getUrl(String database)
-    {
-        return "jdbc:mysql://localhost:" + port.get() + "/" + database + "?createDatabaseIfNotExist=true";
-    }
-
-    /**
-     * Obtain the JDBC connection URL for the default database
-     */
-    public String getUrl()
-    {
-        return getUrl("foo");
-    }
-
-    /**
-     * Obtain a valid user with all priviledges
-     */
-    public String getUser()
-    {
-        return "user";
-    }
-
-    /**
-     * Obtain the password for the user in {@link com.groupon.mysql.testing.MySQLRule#getUser()}  }
-     */
-    public String getPass()
-    {
-        return "pass";
     }
 
     /**
@@ -316,7 +221,6 @@ public class MySQLRule extends ExternalResource
         @Override
         protected void after()
         {
-            List<Exception> exceptions = Lists.newArrayList();
             for (Fixture fixture : fixtures) {
                 try {
                     fixture.tearDown(ds);

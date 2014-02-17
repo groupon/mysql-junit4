@@ -16,7 +16,8 @@
     limitations under the License.
 
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.groupon.mysql</groupId>
     <artifactId>mysql-junit4</artifactId>
@@ -31,10 +32,10 @@
         <name>Groupon, Inc.</name>
     </organization>
     <parent>
-      <groupId>com.groupon.mysql</groupId>
-      <artifactId>mysql-testing</artifactId>
-      <version>0.2-SNAPSHOT</version>
-<!--      <relativePath>../pom.xml</relativePath> -->
+        <groupId>com.groupon.mysql</groupId>
+        <artifactId>mysql-testing</artifactId>
+        <version>0.2-SNAPSHOT</version>
+        <!--      <relativePath>../pom.xml</relativePath> -->
     </parent>
     <inceptionYear>2013</inceptionYear>
 
@@ -62,35 +63,16 @@
     </scm>
 
     <dependencies>
-
         <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>15.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.26</version>
+            <groupId>com.groupon.mysql</groupId>
+            <artifactId>mysql-embed</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>4.11</version>
-        </dependency>
-
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-mxj</artifactId>
-            <version>5.0.12</version>
-        </dependency>
-
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-mxj-db-files</artifactId>
-            <version>5.0.12</version>
         </dependency>
 
         <dependency>
