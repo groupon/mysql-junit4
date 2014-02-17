@@ -27,6 +27,7 @@
 package com.groupon.mysql.testing;
 
 
+import com.groupon.mysql.EmbeddedMySQL;
 import org.junit.Test;
 
 import javax.sql.DataSource;

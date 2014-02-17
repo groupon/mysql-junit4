@@ -24,7 +24,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package com.groupon.mysql.testing;
+package com.groupon.mysql;
 
 import com.google.common.cache.CacheBuilder;
 import com.google.common.cache.CacheLoader;
