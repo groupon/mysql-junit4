@@ -24,8 +24,7 @@
 ~   (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 ~   SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>mysql-junit4</artifactId>
     <packaging>jar</packaging>
@@ -41,7 +40,7 @@
     <parent>
         <groupId>com.groupon.mysql</groupId>
         <artifactId>mysql-testing</artifactId>
-        <version>0.2-SNAPSHOT</version>
+        <version>0.2</version>
         <!--      <relativePath>../pom.xml</relativePath> -->
     </parent>
     <inceptionYear>2013</inceptionYear>
@@ -66,7 +65,7 @@
         <connection>scm:git:git@github.com:groupon/mysql-junit4.git</connection>
         <developerConnection>scm:git:git@github.com:groupon/mysql-junit4.git</developerConnection>
         <url>https://github.com/groupon/mysql-junit4/tree/master</url>
-        <tag>HEAD</tag>
+        <tag>mysql-testing-0.2</tag>
     </scm>
 
     <properties>

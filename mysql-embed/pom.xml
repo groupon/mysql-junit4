@@ -40,7 +40,7 @@
     <parent>
       <groupId>com.groupon.mysql</groupId>
       <artifactId>mysql-testing</artifactId>
-      <version>0.2-SNAPSHOT</version>
+      <version>0.2</version>
       <!-- <relativePath>../pom.xml</relativePath>-->
     </parent>
     <inceptionYear>2013</inceptionYear>
@@ -65,7 +65,7 @@
         <connection>scm:git:git@github.com:groupon/mysql-junit4.git</connection>
         <developerConnection>scm:git:git@github.com:groupon/mysql-junit4.git</developerConnection>
         <url>https://github.com/groupon/mysql-junit4/tree/master</url>
-        <tag>HEAD</tag>
+        <tag>mysql-testing-0.2</tag>
     </scm>
 
     <properties>
