@@ -49,9 +49,9 @@ to embed MySQL.
 # Examples
 
 Take a look at
-[MySQLRuleExample](https://github.com/groupon/mysql-junit4/blob/master/src/test/java/com/groupon/mysql/testing/MySQLRuleExample.java)
+[MySQLRuleExample](https://github.com/groupon/mysql-junit4/blob/master/mysql-junit4/src/test/java/com/groupon/mysql/testing/MySQLRuleExample.java)
 and
-[FlywayFixtureExample](https://github.com/groupon/mysql-junit4/blob/master/src/test/java/com/groupon/mysql/testing/FlywayFixtureExample.java)
+[FlywayFixtureExample](https://github.com/groupon/mysql-junit4/blob/master/mysql-junit4/src/test/java/com/groupon/mysql/testing/FlywayFixtureExample.java)
 for sample code using this library.
 
 # Getting It
