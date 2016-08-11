@@ -62,7 +62,8 @@ The easiest way is via Maven:
 <dependency>
   <groupId>com.groupon.mysql</groupId>
   <artifactId>mysql-junit4</artifactId>
-  <version>0.0.1</version>
+  <version>0.2</version>
+  <scope>test</scope>
 </dependency>
 ```
 
